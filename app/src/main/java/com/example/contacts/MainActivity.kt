@@ -37,6 +37,11 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     )
 }
 
+@Composable
+fun ContactDetails(){
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
