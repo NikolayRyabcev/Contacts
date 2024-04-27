@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    ContactDetails()
                 }
             }
         }
@@ -41,7 +41,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ContactDetails(item:Contact){
+fun ContactDetails(/*item:Contact*/){
     Box{
         Image(painter=painterResource(id=R.drawable.baseline_circle_24),
             contentDescription = null)
@@ -52,6 +52,6 @@ fun ContactDetails(item:Contact){
 @Composable
 fun GreetingPreview() {
     ContactsTheme {
-        Greeting("Android")
+        ContactDetails()
     }
 }
