@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
@@ -19,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.contacts.ui.theme.ContactsTheme
@@ -29,7 +31,6 @@ class MainActivity : ComponentActivity() {
         val contact = null
         setContent {
             ContactsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -48,31 +49,37 @@ fun ContactDetails(contact: Contact, modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         if (contact.imageRes == null) RoundedPicture(s = fio) else Image(
-            modifier=Modifier.size(width = 100.dp, height = 100.dp),
+            modifier = Modifier.size(width = 100.dp, height = 100.dp),
             painter = painterResource(id = R.drawable._12x512),
             contentDescription = null
         )
         Row {
             //Имя
             Text(
-                text = contact.name,
-                modifier = modifier
+                text = contact.name + " ",
+                modifier = modifier,
+                style = MaterialTheme.typography.headlineSmall
             )
             //Отчество
             Text(
                 text = contact.surname ?: "",
-                modifier = modifier
+                modifier = modifier,
+                style = MaterialTheme.typography.headlineSmall
             )
         }
         //Фамилия
         Text(
             text = contact.familyName,
-            modifier = modifier
+            modifier = modifier,
+            style = MaterialTheme.typography.headlineMedium
         )
         //Телефон
         Text(
             text = contact.phone,
-            modifier = modifier
+            modifier = modifier.padding(
+                top = 20.dp,
+                bottom = 8.dp
+            )
         )
         //Адрес
         Text(
