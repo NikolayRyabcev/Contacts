@@ -71,11 +71,18 @@ fun ContactDetails(contact: Contact, modifier: Modifier = Modifier) {
             )
         }
         //Фамилия
-        Text(
-            text = contact.familyName,
-            modifier = modifier,
-            style = MaterialTheme.typography.headlineMedium
-        )
+        Row {
+            Text(
+                text = contact.familyName,
+                modifier = modifier,
+                style = MaterialTheme.typography.headlineMedium
+            )
+            if (contact.isFavorite) Image(
+                painter = painterResource(id = android.R.drawable.star_big_on),
+                contentDescription = null,
+                modifier = Modifier.padding(start = 8.dp, top = 8.dp)
+            )
+        }
         //Телефон
         Row(
             modifier = Modifier.padding(
@@ -87,7 +94,7 @@ fun ContactDetails(contact: Contact, modifier: Modifier = Modifier) {
                 text = "Телефон: ",
                 modifier = Modifier.weight(0.5f),
                 textAlign = TextAlign.Right,
-                fontStyle=FontStyle.Italic
+                fontStyle = FontStyle.Italic
             )
             Text(
                 text = contact.phone,
@@ -106,7 +113,7 @@ fun ContactDetails(contact: Contact, modifier: Modifier = Modifier) {
                 text = "Адрес: ",
                 modifier = Modifier.weight(0.5f),
                 textAlign = TextAlign.Right,
-                fontStyle=FontStyle.Italic
+                fontStyle = FontStyle.Italic
             )
             Text(
                 text = contact.address,
@@ -194,7 +201,7 @@ fun Preview2() {
                         null,
                         "Кузякин",
                         R.drawable._12x512,
-                        true,
+                        false,
                         "-",
                         "Ивановская область, дер. Крутово, д.4",
                         null
