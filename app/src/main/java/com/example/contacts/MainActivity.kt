@@ -20,7 +20,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.contacts.ui.theme.ContactsTheme
@@ -46,7 +48,8 @@ class MainActivity : ComponentActivity() {
 fun ContactDetails(contact: Contact, modifier: Modifier = Modifier) {
     val fio = contact.name.substring(0, 1) + (contact.surname?.substring(0, 1) ?: "")
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(top = 20.dp)
     ) {
         if (contact.imageRes == null) RoundedPicture(s = fio) else Image(
             modifier = Modifier.size(width = 100.dp, height = 100.dp),
@@ -74,22 +77,61 @@ fun ContactDetails(contact: Contact, modifier: Modifier = Modifier) {
             style = MaterialTheme.typography.headlineMedium
         )
         //Телефон
-        Text(
-            text = contact.phone,
-            modifier = modifier.padding(
+        Row(
+            modifier = Modifier.padding(
                 top = 20.dp,
-                bottom = 8.dp
+                bottom = 8.dp,
             )
-        )
+        ) {
+            Text(
+                text = "Телефон: ",
+                modifier = Modifier.weight(0.5f),
+                textAlign = TextAlign.Right,
+                fontStyle=FontStyle.Italic
+            )
+            Text(
+                text = contact.phone,
+                modifier = Modifier.weight(0.5f)
+
+            )
+        }
         //Адрес
-        Text(
-            text = contact.address,
-            modifier = modifier
-        )//е-мэйл
-        Text(
-            text = contact.email ?: "",
-            modifier = modifier
-        )
+        Row(
+            modifier = Modifier.padding(
+                top = 20.dp,
+                bottom = 8.dp,
+            )
+        ) {
+            Text(
+                text = "Адрес: ",
+                modifier = Modifier.weight(0.5f),
+                textAlign = TextAlign.Right,
+                fontStyle=FontStyle.Italic
+            )
+            Text(
+                text = contact.address,
+                modifier = Modifier.weight(0.5f)
+
+            )
+        }
+        //е-мэйл
+        if (contact.email != null) Row(
+            modifier = Modifier.padding(
+                top = 20.dp,
+                bottom = 8.dp,
+            )
+        ) {
+            Text(
+                text = "E-mail: ",
+                modifier = Modifier.weight(0.5f),
+                textAlign = TextAlign.Right
+            )
+            Text(
+                text = contact.email,
+                modifier = Modifier.weight(0.5f)
+
+            )
+        }
     }
 }
 
@@ -128,9 +170,9 @@ fun Preview1() {
                         "Лукашин",
                         null,
                         true,
-                        "Телефон: +7 495 495 95 95",
+                        "+7 495 495 95 95",
                         "г. Москва, 3-я улица Стриотелей, д.25, кв.12",
-                        "E-mail: E-lukashin@practicum.ru"
+                        "E-lukashin@practicum.ru"
                     )
                 )
             }
@@ -153,7 +195,7 @@ fun Preview2() {
                         "Кузякин",
                         R.drawable._12x512,
                         true,
-                        "Телефон: ---",
+                        "-",
                         "Ивановская область, дер. Крутово, д.4",
                         null
                     )
